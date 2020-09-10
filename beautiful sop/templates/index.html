@@ -1,0 +1,60 @@
+{% extends "layout.html" %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1,shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+  </head>
+  <body>
+    <img class="backg" src="/static/bg.jpg">
+    <form action="result.html" method="POST">
+      <div class="job-box-label">
+        <label> Job Title </label>
+      </div>
+      <input
+        class="job-box"
+        type="text"
+        name="job-title"
+        placeholder="Enter Job Title"
+      />
+      <div class="location-label">
+        <label> Location </label>
+      </div>
+      <input
+        class="location-box"
+        type="text"
+        name="location"
+        placeholder="Enter location you are looking for"
+      />
+
+      <input
+        class="vacant"
+        type="image"
+        src="/static/question mark.png"
+        alt="Submit"
+      />
+    </form>
+    <div class="header-marquee">
+      <div class="center">
+        <marquee class="marquee">
+          * This is not a mobile freindly website. Please use it on desktop
+          only OR switch to desktop view on mobile.
+        </marquee>
+      </div>
+    </div>
+
+    <a class="linkedin" href="https://www.linkedin.com/in/tanvi-bhardwaj-1aab42199/"><img src="/static/linkedin.png" width="70px" height="70px"></a>
+    <a class="github" href="https://github.com/bhardwajtanvi"><img src="/static/github.png" width="70px" height="70px"></a>
+    <a class="gmail" href="mailto:tanvibhardwaj37@gmail.com"><img src="/static/gmail_logo_PNG5.png" width="50px" height="40px"></a>
+    <a class="behance" href="https://www.behance.net/tanvibhardwaj1"><img src="/static/behance.png" width="70px" height="70px"></a>
+    
+  </body>
+</html>
+{% endblock %}

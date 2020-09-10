@@ -1,0 +1,180 @@
+{% extends "layout.html" %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1,shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+  </head>
+
+  <body>
+    {%include 'index.html'%}
+
+    <div class="img-responsive" id="cards1"></div>
+    <div id="cards2"></div>
+    <div id="cards3"></div>
+
+    <div id="card1">
+      <p>for card1</p>
+    </div>
+    <div id="card2">
+      <p>for card2</p>
+    </div>
+    <div id="card3">
+      <p>for card 3</p>
+    </div>
+    <div id="card_comp1">
+      <p>for card1</p>
+    </div>
+    <div id="card_comp2">
+      <p>for card2</p>
+    </div>
+    <div id="card_comp3">
+      <p>for card 3</p>
+    </div>
+    <div id="card_link1">
+      <p>for card1</p>
+    </div>
+    <div id="card_link2">
+      <p>for card2</p>
+    </div>
+    <div id="card_link3">
+      <p>for card 3</p>
+    </div>
+    <!-- <input id="cards1" type="image" src="/static/card.png" /> -->
+    <!-- <input class="card2" type="image" src="/static/card.png" />
+  <input class="card3" type="image" src="/static/card.png" /> -->
+
+  <div class="pagination">
+    <div class="center">
+      <a>&laquo;</a>
+    {% for j in range(sum_num)%}
+    <a onclick="appendData('{{j+1}}')"> {{j+1}}</a>
+    {%endfor%}
+    <a>&raquo;</a>
+    </div>
+  </div>
+    <script>
+      var jsonData;
+      fetch("static/temporary.json")
+        .then(function (response) {
+          // console.log(response.clone());
+          return response.json();
+        })
+        .then(function (data) {
+          // console.log(data);
+          jsonData = data;
+          appendData(1);
+        })
+        .catch(function (err) {
+          console.log("error: " + err);
+        });
+      var i = 0;
+      function appendData(page_no) {
+        // console.log(page_no);
+        // console.log(jsonData);
+        var x = document.getElementById("cards1");
+        var x2 = document.getElementById("cards2");
+        var x3 = document.getElementById("cards3");
+        var mainContainer = document.getElementById("card1");
+        var mainContainer2 = document.getElementById("card2");
+        var mainContainer3 = document.getElementById("card3");
+        document.getElementById("card1").innerHTML = "";
+        document.getElementById("card2").innerHTML = "";
+        document.getElementById("card3").innerHTML = "";
+        var mainContainer4 = document.getElementById("card_comp1");
+        var mainContainer5 = document.getElementById("card_comp2");
+        var mainContainer6 = document.getElementById("card_comp3");
+        document.getElementById("card_comp1").innerHTML = "";
+        document.getElementById("card_comp2").innerHTML = "";
+        document.getElementById("card_comp3").innerHTML = "";
+        var mainContainer7 = document.getElementById("card_link1");
+        var mainContainer8 = document.getElementById("card_link2");
+        var mainContainer9 = document.getElementById("card_link3");
+        document.getElementById("card_link1").innerHTML = "";
+        document.getElementById("card_link2").innerHTML = "";
+        document.getElementById("card_link3").innerHTML = "";
+
+        document.getElementById("cards1").innerHTML = "";
+        document.getElementById("cards2").innerHTML = "";
+        document.getElementById("cards3").innerHTML = "";
+        var sum_num = parseInt("{{sum_num}}");
+        // console.log(sum_num);
+
+        // for (var k=0;k<sum_num;k++){
+        // console.log(k);
+        for (i = (page_no - 1) * 3; i < page_no * 3; i++) {
+          for (var j = 0; j < 3; j++) {
+            if (j == 0 && jsonData["titles"][i] != null) {
+              var img1 = document.createElement("img1");
+              img1.innerHTML =
+                '<img src="/static/card.png" width="270px" height="270px">';
+              x.appendChild(img1);
+              var div = document.createElement("div");
+              div.innerHTML = jsonData["titles"][i];
+              mainContainer.appendChild(div);
+              var div_comp = document.createElement("div_comp");
+              div_comp.innerHTML = jsonData["companies"][i];
+              mainContainer4.appendChild(div_comp);
+              var div_link = document.createElement("div_link");
+              div_link.innerHTML =
+                "<a href='" + jsonData["links"][i] + "'>Interested?</a>";
+              mainContainer7.appendChild(div_link);
+
+              i++;
+            } else if (j == 1 && jsonData["titles"][i] != null) {
+              var img2 = document.createElement("img2");
+              img2.innerHTML =
+                '<img src="/static/card.png" width="270px" height="270px">';
+              x2.appendChild(img2);
+              var div2 = document.createElement("div2");
+              div2.innerHTML = jsonData["titles"][i];
+              console.log(div2);
+              mainContainer2.appendChild(div2);
+              var div_comp2 = document.createElement("div_comp2");
+              div_comp2.innerHTML = jsonData["companies"][i];
+              mainContainer5.appendChild(div_comp2);
+              var div_link2 = document.createElement("div_link2");
+              div_link2.innerHTML =
+                "<a href='" + jsonData["links"][i] + "'>Interested?</a>";
+              mainContainer8.appendChild(div_link2);
+
+              i++;
+            } else if (j == 2 && jsonData["titles"][i] != null) {
+              var img3 = document.createElement("img3");
+              img3.innerHTML =
+                '<img src="/static/card.png" width="270px" height="270px">';
+              x3.appendChild(img3);
+              var div3 = document.createElement("div3");
+              div3.innerHTML = jsonData["titles"][i];
+              mainContainer3.appendChild(div3);
+              var div_comp3 = document.createElement("div_comp3");
+              div_comp3.innerHTML = jsonData["companies"][i];
+              mainContainer6.appendChild(div_comp3);
+              var div_link3 = document.createElement("div_link3");
+              div_link3.innerHTML =
+                "<a href='" + jsonData["links"][i] + "'>Interested?</a>";
+              mainContainer9.appendChild(div_link3);
+
+              i++;
+            }
+          }
+          // }
+          // var div = document.createElement("div")
+          // div.innerHTML = 'titles: ' + data["titles"][i] + '';
+
+          // mainContainer.appendChild(div);
+        }
+
+        i = i;
+      }
+    </script>
+  </body>
+</html>
+{% endblock %}
